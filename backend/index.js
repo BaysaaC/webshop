@@ -20,7 +20,7 @@ MongoClient.connect(
         console.error(err.stack);
         process.exit(1);
     })
-    .then(async client => {
+    .then(async (client) => {
         await RestaurantsDAO.injectDB(client); // inject the DB right before starting the server
         // await ReviewsDAO.injectDB(client);
         app.listen(port, () => {

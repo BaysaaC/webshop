@@ -58,10 +58,10 @@ export default class RestaurantsDAO {
 
     static async getRestaurantByID(id) {
         try {
-            const pipeline = [
+            const pipeline = [ // MongoDB aggregation pipeline / data processing pipeline
                 {
                     $match: {
-                        _id: new ObjectId(id),
+                        _id: new ObjectId(id)
                     },
                 },
                 {

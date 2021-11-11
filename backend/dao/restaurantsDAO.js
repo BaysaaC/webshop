@@ -5,7 +5,7 @@ let restaurants;
 export default class RestaurantsDAO {
     static async injectDB(conn) {
         if (restaurants) {
-            return
+            return;
         }
         try {
             restaurants = await conn.db(process.env.ATLAS_NS).collection("restaurants");
@@ -14,7 +14,7 @@ export default class RestaurantsDAO {
                 `Unable to establish a collection handle in restaurantsDAO: ${e}`,
             );
         }
-    }
+    };
 
     static async getRestaurants({
         filters = null,
@@ -54,7 +54,8 @@ export default class RestaurantsDAO {
             );
             return { restaurantsList: [], totalNumRestaurants: 0 };
         }
-    }
+    };
+
     static async getRestaurantByID(id) {
         try {
             const pipeline = [
@@ -91,22 +92,22 @@ export default class RestaurantsDAO {
                         reviews: "$reviews",
                     },
                 },
-            ]
-            return await restaurants.aggregate(pipeline).next()
+            ];
+            return await restaurants.aggregate(pipeline).next();
         } catch (e) {
-            console.error(`Something went wrong in getRestaurantByID: ${e}`)
-            throw e
+            console.error(`Something went wrong in getRestaurantByID: ${e}`);
+            throw e;
         }
-    }
+    };
 
     static async getCuisines() {
-        let cuisines = []
+        let cuisines = [];
         try {
-            cuisines = await restaurants.distinct("cuisine")
-            return cuisines
+            cuisines = await restaurants.distinct("cuisine");
+            return cuisines;
         } catch (e) {
-            console.error(`Unable to get cuisines, ${e}`)
-            return cuisines
+            console.error(`Unable to get cuisines, ${e}`);
+            return cuisines;
         }
-    }
+    };
 }

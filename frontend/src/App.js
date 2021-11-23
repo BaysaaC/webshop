@@ -8,6 +8,17 @@ import RestaurantsList from "./components/restaurants-list";
 import Login from "./components/login";
 
 function App() {
+  const [user, setUser] = React.useState(null);
+
+  async function login(user = null) {
+    setUser(user);
+  };
+
+  async function logout() {
+    setUser(null);
+  };
+
+
   return (
     <div className="App">
       <nav className="navbar navbar-expand navbar-dark bg-dark">
@@ -36,7 +47,8 @@ function App() {
 
       <div className="container mt-3">
         <Switch>
-          <Route exact path={["/", "/restaurants"]} component={RestaurantsList} />
+          <Route
+            exact path={["/", "/restaurants"]} component={RestaurantsList} />
           <Route
             path="/restaurants/:id/review"
             render={(props) => (
